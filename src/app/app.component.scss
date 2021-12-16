@@ -1,0 +1,13 @@
+.cell {
+    border-color: #b1b4b6;
+    border-style: solid;
+    border-width: 0.5px;
+
+    &.live {
+        background-color: red;
+    }
+
+    &.disabled{
+        background-color: black;
+    }
+}

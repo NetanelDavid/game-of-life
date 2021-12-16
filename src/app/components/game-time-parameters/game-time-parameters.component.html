@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="card control-panel">
+    <div class="card-body">
+
+      <h4 class="text-center mb-2">real-time control panel</h4>
+
+      <div class="row justify-content-center">
+        <button pButton pRipple type="button" [icon]=" active ? 'pi pi-stop' : 'pi pi-play'" class="p-button-rounded"
+          [ngClass]="active ? 'p-button-danger' : 'p-button-success'" (click)="startOrStop()">
+        </button>
+      </div>
+
+      <form [formGroup]="form" class="row mt-4">
+
+        <div class="col-4">
+          <label class="col-2">speed: </label>
+          <p-dropdown formControlName="speed" (onChange)="sendForm()" styleClass="col-6" class="col-10 "
+            [options]="speedControl.options" optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="col-4">
+          <label class="col-2">walls: </label>
+          <p-dropdown formControlName="walls" (onChange)="sendForm()" styleClass="col-6" class="col-10 "
+            [options]="wallsControl.options" optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="col-4">
+          <label class="col-2">policy: </label>
+          <p-dropdown formControlName="policy" (onChange)="sendForm()" styleClass="col-6" class="col-10 "
+            [options]="policyControl.options" optionLabel="name">
+          </p-dropdown>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

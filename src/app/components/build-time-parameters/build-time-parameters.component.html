@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+
+  <div class="card form">
+    <div class="card-body">
+
+      <h4 class="text-center mb-3">parameters for building the game</h4>
+
+      <form [formGroup]="form" class="row">
+
+        <div class="col-4">
+          <label class="col-2">size: </label>
+          <p-dropdown styleClass="col-6" class="col-10" formControlName="size" [options]="sizeControl.options"
+            optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="col-4">
+          <label class="col-2">shape: </label>
+          <p-dropdown styleClass="col-6" class="col-10 " formControlName="shape" [options]="shapeControl.options"
+            optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="col-4">
+          <label class="col-2">seed: </label>
+          <p-dropdown styleClass="col-6" class="col-10 " formControlName="seed" [options]="seedControl.options"
+            optionLabel="name">
+          </p-dropdown>
+        </div>
+
+        <div class="mt-3 col">
+          <p-button (click)="sendForm()" label="submit" styleClass="col-12"></p-button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

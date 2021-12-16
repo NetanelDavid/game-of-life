@@ -1,0 +1,24 @@
+<div class="row mt-3">
+  <app-build-time-parameters (buildTimeParametersEvent)="applyBuildTimeParameters($event)">
+  </app-build-time-parameters>
+</div>
+
+<div class="row mt-3">
+  <app-game-time-parameters (gameTimeParametersEvent)="applyGameTimeParameters($event)"
+    (startOrStopEvent)="$event ? start() : stop()" [active]="active">
+  </app-game-time-parameters>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+  <div class="row">
+    <table>
+      <tr *ngFor="let row of table">
+        <td *ngFor="let cell of row" (click)="cell.changeStatusByUser()" class="cell"
+          [ngStyle]="{ 'width' : sizeCellPx ,'height' : sizeCellPx }" [ngClass]="cell.status">
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<p-toast></p-toast>
