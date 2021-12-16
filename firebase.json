@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/index.html",
+    "public": "dist/conayes-game-of-life",
     "ignore": [
       "firebase.json",
       "**/.*",
