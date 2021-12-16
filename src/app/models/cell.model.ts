@@ -35,16 +35,16 @@ export class Cell {
         return this.status != oldStatus;
     }
 
-    public changeStatusByUser() {
+    public changeStatusByUser(active: boolean) {
         switch (this.status) {
             case Status.disabled:
-                this.status = Status.dead;
+                this.status = active ? Status.disabled : Status.dead;
                 break;
             case Status.dead:
                 this.status = Status.live;
                 break;
             case Status.live:
-                this.status = Status.disabled;
+                this.status = active ? Status.dead : Status.disabled;
                 break;
         }
     }

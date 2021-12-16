@@ -13,7 +13,7 @@
   <div class="row">
     <table>
       <tr *ngFor="let row of table">
-        <td *ngFor="let cell of row" (click)="cell.changeStatusByUser()" class="cell"
+        <td *ngFor="let cell of row" (click)="cell.changeStatusByUser(active)" class="cell"
           [ngStyle]="{ 'width' : sizeCellPx ,'height' : sizeCellPx }" [ngClass]="cell.status">
         </td>
       </tr>
