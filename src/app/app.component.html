@@ -14,7 +14,8 @@
     <table>
       <tr *ngFor="let row of table">
         <td *ngFor="let cell of row" (click)="cell.changeStatusByUser(active)" class="cell"
-          [ngStyle]="{ 'width' : sizeCellPx ,'height' : sizeCellPx }" [ngClass]="cell.status">
+          [ngStyle]="{ 'width' : sizeCellPx ,'height' : sizeCellPx }"
+          [ngClass]="[cell.status ,buildTimeParameters.shape.border ? 'border' : '']">
         </td>
       </tr>
     </table>

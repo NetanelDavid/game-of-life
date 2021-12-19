@@ -56,16 +56,14 @@ export class Cell {
         }
 
         this.neighborsCache = [];
-        for (let y: number, offsetY = -1; offsetY <= 1; offsetY++) {
+        for (let y = this.y - 1; y <= this.y + 1; y++) {
 
-            y = this.y + offsetY;
             if (y < 0 || y >= table.length) {
                 continue;
             }
-            for (let x: number, offsetX = -1; offsetX <= 1; offsetX++) {
+            for (let x = this.x - 1; x <= this.x + 1; x++) {
 
-                x = this.x + offsetX;
-                if ((!offsetX && !offsetY) || x < 0 || x >= table.length) {
+                if ((x == this.x && y == this.y) || x < 0 || x >= table.length) {
                     continue;
                 }
                 this.neighborsCache.push(table[y][x]);

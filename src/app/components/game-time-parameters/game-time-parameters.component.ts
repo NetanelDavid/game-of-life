@@ -102,6 +102,13 @@ export class GameTimeParametersComponent implements OnInit, OnChanges {
   })
 
   constructor() {
+    const defaultOfUser = JSON.parse(localStorage.getItem('game-time-parameters'))
+    if (defaultOfUser) {
+      this.speedControl.control.setValue(this.speedControl.options.find((s) => s.name == defaultOfUser.speed));
+      this.wallsControl.control.setValue(this.wallsControl.options.find((w) => w.name == defaultOfUser.walls));
+      this.policyControl.control.setValue(this.policyControl.options.find(p => p.name == defaultOfUser.policy));
+      return
+    }
     this.speedControl.control.setValue(this.speedControl.options[this.speedControl.indexDefault]);
     this.wallsControl.control.setValue(this.wallsControl.options[this.wallsControl.indexDefault]);
     this.policyControl.control.setValue(this.policyControl.options[this.policyControl.indexDefault]);
@@ -118,11 +125,18 @@ export class GameTimeParametersComponent implements OnInit, OnChanges {
   }
 
   sendForm() {
+    localStorage.setItem('game-time-parameters',
+    JSON.stringify({
+      speed: this.speedControl.control.value.name,
+      walls: this.wallsControl.control.value.name,
+      policy: this.policyControl.control.value.name
+    })
+  )
     this.gameTimeParametersEvent.emit(this.form.value);
   }
 
   startOrStop() {
-    this.startOrStopEvent.emit(this.active = !this.active);
+    this.startOrStopEvent.emit(!this.active);
   }
 
 }

@@ -19,7 +19,6 @@ export class AppComponent {
   gameTimeParameters: GameTimeParameters;
   active: boolean;
   interval: any;
-  timeout: any;
 
   constructor(private messageServise: MessageService) { }
 
@@ -61,9 +60,7 @@ export class AppComponent {
   }
 
   start() {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
-    }
+
     this.active = true;
     this.interval = setInterval(
       () => {
@@ -86,17 +83,14 @@ export class AppComponent {
   }
 
   stableState() {
-    const time = 4 * 1000;
     this.stop();
     this.messageServise.add({
-      life: time,
+      life : 1000,
       severity: 'info', summary: 'the game has reached a steady state',
-      detail: 'the game will resume in four seconds'
+      detail: 'the game has been restarted'
     });
-    this.timeout = setTimeout(() => {
-      this.buildTable();
-      this.start();
-    }, time);
+    this.buildTable();
+    this.start();
   }
 
   stop() {

@@ -55,11 +55,13 @@ export class BuildTimeParametersComponent implements OnInit {
     options: [
       {
         name: "rectengular",
+        border: true,
         checkIsDisabledBySizeAndCoordinates: (size: number, y: number, x: number) => {
           return false
         }
       }, {
         name: "cross",
+        border: false,
         checkIsDisabledBySizeAndCoordinates: (size: number, y: number, x: number) => {
           const min = Math.round(size / 3);
           const max = Math.round(size / 3 * 2);
@@ -67,6 +69,7 @@ export class BuildTimeParametersComponent implements OnInit {
         }
       }, {
         name: "diamond",
+        border: false,
         checkIsDisabledBySizeAndCoordinates: (size: number, y: number, x: number) => {
           size--;
           const smallMedium = Math.floor((size) / 2);
@@ -80,16 +83,18 @@ export class BuildTimeParametersComponent implements OnInit {
         }
       }, {
         name: "circular",
+        border: false,
         checkIsDisabledBySizeAndCoordinates: (size: number, y: number, x: number) => {
           const center = size / 2 - 0.5;
-          const radius = size / 2;
+          const radius = size / 2 - 1;
           return Math.pow(x - center, 2) + Math.pow(y - center, 2) > Math.pow(radius, 2);
         }
       }, {
         name: "ring",
+        border: false,
         checkIsDisabledBySizeAndCoordinates: (size: number, y: number, x: number) => {
           const center = size / 2 - 0.5;
-          const largeRadius = size / 2;
+          const largeRadius = size / 2 - 1;
           const smallRadius = largeRadius / 5 * 3;
           const distancesquared = Math.pow(x - center, 2) + Math.pow(y - center, 2);
           return distancesquared > Math.pow(largeRadius, 2) || distancesquared < Math.pow(smallRadius, 2);
@@ -123,6 +128,13 @@ export class BuildTimeParametersComponent implements OnInit {
   })
 
   constructor() {
+    const defaultOfUser = JSON.parse(localStorage.getItem('build-time-parameters'))
+    if (defaultOfUser) {
+      this.sizeControl.control.setValue(this.sizeControl.options.find((s) => s.name == defaultOfUser.size));
+      this.shapeControl.control.setValue(this.shapeControl.options.find((s) => s.name == defaultOfUser.shape));
+      this.seedControl.control.setValue(this.seedControl.options.find(s => s.name == defaultOfUser.seed));
+      return
+    }
     this.sizeControl.control.setValue(this.sizeControl.options[this.sizeControl.indexDefault]);
     this.shapeControl.control.setValue(this.shapeControl.options[this.shapeControl.indexDefault]);
     this.seedControl.control.setValue(this.seedControl.options[this.seedControl.indexDefault]);
@@ -133,6 +145,13 @@ export class BuildTimeParametersComponent implements OnInit {
   }
 
   sendForm() {
+    localStorage.setItem('build-time-parameters',
+      JSON.stringify({
+        size: this.sizeControl.control.value.name,
+        shape: this.shapeControl.control.value.name,
+        seed: this.seedControl.control.value.name
+      })
+    )
     this.buildTimeParametersEvent.emit(this.form.value);
   }
 }
